@@ -1,56 +1,47 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+@font-face {
+    font-family: 'Poppins';
+    src: url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');}
 
 
-/*Color Palette*/
 :root {
     --primary: rgba(245, 245, 245, 0.5);
-
+    --bg: white;
+    --invertedbg: black;
+    font-family: 'Poppins', sans-serif;
 }
 
 * {
     margin:0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
 }
 
+body {
+    background-color: #E0E5EC;
+}
+
+/*-----------------------------------------------------
+NAVIGATION BAR
+-----------------------------------------------------*/
 .navbar {
     background: var(--primary);
-    border: 1px solid white;
+    border: 1px solid var(--bg);
     box-sizing: border-box;
-    /*opacity: 0.5;*/
     backdrop-filter: blur(3px);
-    /*
-    display: flex;
-    justify-content: left;
-    align-items: center;
-    */
-    /*EVENTUALLY WILL NEED THE FOLLOWING SO THAT THE NAVBAR IS ALWAYS DISPLAYED AT THE TOP
-    position: fixed;
-    top: 0;
-    width: 100%;
-    */
     position: fixed;
     z-index: 100;
     width: 100%;
     right: 0px;
     top: 0px;
     padding: 1em;
-    height: 75px;
-    /*
-    filter: blur(8px); 
-    -webkit-filter: blur(8px);*/
-    display: inline-block;
-
-    
+    height: 80px;
+    display: inline-block;   
 }
-
 
 .navbar ul {
     position: relative;
     place-content: space-between;
     list-style: none;
-    
 }
 
 .logo {
@@ -60,7 +51,6 @@
 .navbar .menu {
     display: inline-block;
     margin-right:50px;
-    
 }
 
 .navbar .menu ul li {
@@ -70,92 +60,11 @@
 
 .menu-text {
     text-decoration: none;
-    color: black; 
+    color: var(--invertedbg); 
 }
 
 .navlinks {
     float: right;
-}
-
-/*PROMO CODE SCROLLING BANNER*/
-.promocode {
-    background-color: black;
-    font-weight: bold;
-    color: white;
-    width: 84%;
-    height: 30px;
-    position: absolute;
-    top: 6rem;
-    right: 0px;
-    text-align: center;
-    letter-spacing: 0.25em;
-}
-
-.grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    margin-top: 8rem;
-    right: 0px;
-    margin-left: 230px;
-}
-
-.card {
-    background: var(--primary);
-    border-radius: 35px;
-    margin: 15px;
-    padding: 8px;
-    width: 20rem;
-
-    margin-top: 5rem;
-    margin-right: 4rem;
-    /*width: 381px;
-    height: 417px;  */
-    text-align: center;
-
-}
-
-.name {
-    font-size: 26px;
-    font-weight: 700px;
-    font-weight: bold;
-    line-height: 39px;
-    text-align: center;
-    letter-spacing: 0.25em;
-}
-
-.colorway {
-    font-size: 13px;
-    font-weight: normal;
-    line-height: 21px;
-    text-align: center;
-}
-
-.price {
-    font-weight: normal;
-    font-size: 34px;
-    line-height: 51px;
-    text-align: center;
-}
-
-.card img {
-    position: relative;
-    bottom: 50px;
-    justify-content: center;
-    width:100%; 
- 
-
-}
-
-.itemcontainer {
-    display: inline-block;
-    margin-left: 1rem;
-    margin-right: 1rem;
-    
-}
-
-.add-wishlist {
-    height: 30px;
 }
 
 #wishlist {
@@ -163,72 +72,253 @@
     height: 30px;
 }
 
-.add-bag {
-    height: 32px;
-    
-}
 #bag {
     width: 32px;
     height: 32px;
 }
 
-.reviews {
-    text-align: center;
-}
-
-.sidebar {
-    background-color: var(--primary);
-    /*margin-top: 75px;*/
-    height: 100vh;
-    width: 0px;
-    display: inline;
-    position: fixed;
-    
-
-}
-.filters-title {
-    margin-bottom: 30px;
-}
-.filters {
-    /*margin-top: 75px;*/
-    text-align: left;
-}
-
+/* mobile menu */
 #burger {
     display: none;
 }
 
+/*-----------------------------------------------------
+PROMO CODE SCROLLING BANNER
+-----------------------------------------------------*/
+.promocode {
+    background-color: var(--invertedbg);
+    font-weight: bold;
+    color: var(--bg);
+    width: 100%;
+    height: 2.5rem;
+    position: absolute;
+    top: 80px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.25em;
+}
+
+.separator {
+    color: darkgrey;
+}
+
+/*-----------------------------------------------------
+PRODUCTS' GRID (CONTAINING CARDS)
+-----------------------------------------------------*/
+.grid {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+
+    margin-top: 10rem;
+    margin-left: 15rem;
+    margin-bottom: 3rem;
+}
+
+/* card */
+.card {
+    /*background: var(--primary);*/
+    background: #E0E5EC;
+
+    
+    position: relative;
+    
+    box-shadow: -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001,
+    inset 0px 0px 0px 0px #fff9, 
+    inset 0px 0px 0px 0px #0001,
+    inset 0px 0px 0px 0px #fff9,
+    inset 0px 0px 0px 0px #0001;
+    border-radius: 3rem;
+    margin: 2.5rem;
+    padding: 1rem;
+    width: 20rem;
+    height: 23.5rem;
+    text-align: center;
+    align-items: center;
+}
+
+.card img {
+    position: relative;
+    justify-content: center;
+    bottom: 8rem;
+    width:  90%;
+    height: 90%;    
+}
+
+.name {
+    position: relative;
+    bottom: 12rem;
+    font-size: 1.2rem;
+    font-weight: 700px;
+    text-align: center;
+    letter-spacing: 0.25em;
+    margin-top: 0.5rem;
+}
+
+.colorway {
+    position: relative;  
+    bottom: 12rem;
+    font-size: 1rem; 
+    font-weight: normal;
+    margin-top: 0.5rem;
+}
+
+.price {
+    position: relative;  
+    bottom: 12rem;
+    font-size: 1.5rem; 
+    font-weight: normal;
+    margin-top: 1rem;
+}
+
+.itemcontainer {
+    display: inline-block;
+    position: relative;  
+    bottom: 12rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.add-wishlist {
+    height: 30px;
+}
+
+.add-bag {
+    height: 32px;
+}
+
+.reviews {
+    position: relative;  
+    bottom: 12rem;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.card-hyperlink {
+    text-decoration: none;
+    color: var(--invertedbg);
+}
+
+/*-----------------------------------------------------
+FILTERS' SIDEBAR
+-----------------------------------------------------*/
+
+.sidebar {
+    background: #e0e5ec;
+    box-shadow: -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001,
+    inset 0px 0px 0px 0px #fff9, 
+    inset 0px 0px 0px 0px #0001,
+    inset 0px 0px 0px 0px #fff9,
+    inset 0px 0px 0px 0px #0001;
+    border-radius: 1rem;
+    height: 4rem;
+    width: 6rem;
+    margin-left: 4rem;
+    display: inline;
+    position: fixed;
+    align-items: center;
+}
+
+
+/*.footer-frame  {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    transition: box-shadow 0.6s cubic-bezier(.79, .21, .06, .81);
+}*/
+
+ 
+
+.filters {
+    text-align: left;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.filters-title {
+    margin-bottom: 1rem;
+    padding-top: 1rem;
+    font-weight: normal;
+    font-size: 1rem;
+    text-align: center;
+}
+
+
+.filter-type {
+    margin: 2rem;
+    display: none;
+}
+
+/*-----------------------------------------------------
+EFFECTS/ANIMATIONS
+-----------------------------------------------------*/
+
+
+/* card animations */
+.card:hover {
+    transform: scale(1.1);
+    transition: 500ms ease;
+    border-radius: 0;
+}
+
+.card:hover .item-img {
+    transform: scale(1.5);
+    transition: 500ms ease;
+    transform: rotate(-15deg);
+}
+
+
+/* filters sidebar animations */
+.sidebar:hover {
+    width: 15rem;
+    transition: width 300ms ease;
+    border-radius: 0;
+    height: 79vh;
+    margin-left: 0;
+
+}
+
+.sidebar:hover .filter-type {
+    display: flex;
+}
+
+/* footer social media buttons */
+.box:active {
+    box-shadow:
+    7px 7px 20px 0px rgba(255, 255, 255, 0.5),
+    -4px -4px 6px 0px rgba(116, 125, 136, 0.2),
+    inset -4px -4px 6px 0px rgba(255, 255, 255, 0.5), 
+    inset 4px 4px 6px 0px rgba(116, 125, 136, 0.3);
+}
+
+.btn:hover {
+    transform: scale(1.7);
+    border-radius: 0;
+}
+
+/*-----------------------------------------------------
+MEDIA QUERIES
+-----------------------------------------------------*/
+
 @media screen and (max-width: 600px){
-    
-    .name {
-        font-size: 18px;
-    }
-    
-    .colorway {
-        font-size: 12px;
-    }
-    
-    .price {
-        font-size: 18px;
-        text-align: center;
-    }
-
-    .reviews {
-        font-size: 13px;
-    }
-
-    .navlinks {
-        overflow: auto;
-    }
-
     .sidebar {
-        visibility: hidden;
+        display: none;
     }
 
-    .grid {
-        width: 100%;
-        }
-    
     .card {
         width: 45%;
         display: flex;
@@ -245,6 +335,7 @@
 
     #burger {
         visibility: visible;
+        display: inline;
     }
     .promocode {
         width: 100%;
@@ -252,20 +343,88 @@
 
 }
 
-
-
 @media screen and (max-width: 768px){
     .sidebar {
         visibility: hidden;
     }
-
-
 }
 
 @media screen and (min-width: 1440px){
-    .promocode {
-        width: 75%;
-    }
+}
 
 
+footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    width: 100%;
+    margin: -8px;
+    background: #e0e5ec;
+}
+
+.footer-frame  {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    box-shadow: -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001,
+    inset 0px 0px 0px 0px #fff9, 
+    inset 0px 0px 0px 0px #0001,
+    inset 0px 0px 0px 0px #fff9,
+    inset 0px 0px 0px 0px #0001;
+    transition: box-shadow 0.6s cubic-bezier(.79, .21, .06, .81);
+}
+
+.btn {
+    height: 35px;
+    width: 35px;
+    border-radius: 50px;
+    background: #e0e5ec;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    box-shadow: -7px -7px 20px 0px #fff9,
+    -4px -4px 5px 0px #fff9,
+    7px 7px 20px 0px #0002,
+    4px 4px 5px 0px #0001,
+    inset 0px 0px 0px 0px #fff9, 
+    inset 0px 0px 0px 0px #0001,
+    inset 0px 0px 0px 0px #fff9,
+    inset 0px 0px 0px 0px #0001;
+    transition: box-shadow 0.6s cubic-bezier(0.79, 0.21, 0.06, 0.81);
+    transition: all 0.5s ease;
+    font-size: 15px;
+    color: rgba(42, 52,84, 1);
+    text-decoration: none;
+}
+
+.twitter-color {
+    color: #1da1f2;
+}
+
+.facebook-color {
+    color: #1877f2;
+}
+
+.youtube-color {
+    color: #ff0000;
+}
+
+.instagram-color {
+    color: #c32aa3;
+}
+
+.inbox-color {
+    color: grey;
 }
