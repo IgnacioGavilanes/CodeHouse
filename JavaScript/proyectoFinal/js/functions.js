@@ -13,12 +13,12 @@ and creates a list of them for the user to select one. Also contains an exit opt
 Returns
 - variable menu with all products in array ordered by id. 
 ----------------------------------------------------------------------------------------------------------*/
-const mainMenu =() => {
-    let menu = "Seleccione el producto que desee comprar: \n";
-    storeItems.forEach((item, i) => menu += i+1 + ".- " + item.title + "\n");
-    menu += (storeItems.length + 1) + ".- Salir"
-    return parseInt(prompt(menu));
-}
+// const mainMenu =() => {
+//     let menu = "Seleccione el producto que desee comprar: \n";
+//     storeItems.forEach((item, i) => menu += i+1 + ".- " + item.title + "\n");
+//     menu += (storeItems.length + 1) + ".- Salir"
+//     return parseInt(prompt(menu));
+// }
 
 /*----------------------------------------------------------------------------------------------------------
 This function compares the amount of stock the user wants to purchase agains the amount of stock available 
@@ -27,15 +27,15 @@ Returns
 - false if the amount the user wants to buy exceeds product stock
 - true if the amount of items selected by the user are available for purchase
 ----------------------------------------------------------------------------------------------------------*/
-function checkStock (quantity, stock) {
-    if (quantity > stock) {
-        alert(`Stock insuficiente. El stock disponible de ${addToBag(found.title)} es de ${addToBag(found.stock)}`);
-        return false
-    }
-    else {
-        return true
-    }
-}
+// function checkStock (quantity, stock) {
+//     if (quantity > stock) {
+//         alert(`Stock insuficiente. El stock disponible de ${addToBag(found.title)} es de ${addToBag(found.stock)}`);
+//         return false
+//     }
+//     else {
+//         return true
+//     }
+// }
 
 /*----------------------------------------------------------------------------------------------------------
 This function handles adding products to shopping bag. It also utilizes checkStock to see if there is enough
@@ -44,23 +44,60 @@ checkStock function uses alert to display a message informing the user the stock
 Returns
 - does not return anything
 ----------------------------------------------------------------------------------------------------------*/
-function addToBag (quantity, itemId) {
-    let found = storeItems.find(item => item.id === itemId);
+// function addToBag (quantity, itemId) {
+//     let found = storeItems.find(item => item.id === itemId);
 
-    if (checkStock(quantity, found.stock)) {
-        preTaxTotal += (quantity * found.price);
-        storeItems[itemId - 1].stock -= quantity;
-        bag = preTaxTotal + tax(preTaxTotal);
+//     if (checkStock(quantity, found.stock)) {
+//         preTaxTotal += (quantity * found.price);
+//         storeItems[itemId - 1].stock -= quantity;
+//         bag = preTaxTotal + tax(preTaxTotal);
 
-        alert(`Su total es de ${bag} incluyendo impuestos`)
-    }
-}
+//         alert(`Su total es de ${bag} incluyendo impuestos`)
+//     }
+// }
+//-----------------------//-----------------------//-----------------------//-----------------------//-----------------------
 
 
-function tax (preTaxTotal){
-    let taxAmount = preTaxTotal * taxValue;
-    return taxAmount;
-}
+
+/*----------------------------------------------------------------------------------------------------------
+Flow of web app
+----------------------------------------------------------------------------------------------------------*/
+// do {
+//     itemId = mainMenu()
+//     if (itemId === (storeItems.length + 1)) break;
+
+//     quantity = parseInt(prompt(askQuantity));
+
+//     addToBag(quantity, itemId)
+
+//     answer = prompt("Desea agregar mas productos? S/N")
+// }
+
+// while (answer == "S")
+
+// if (bag > 0) {
+//     alert(`El total de su compra es de ${bag}`)
+// }
+
+// else {
+//     alert("Gracias por su visita")
+// }
+
+// localStorage.setItem(bag);
+// console.log(localStorage);
+
+//-----------------------//-----------------------//-----------------------//-----------------------//-----------------------
+
+
+
+
+
+
+
+// function tax (preTaxTotal){
+//     let taxAmount = preTaxTotal * taxValue;
+//     return taxAmount;
+// }
 
 
 

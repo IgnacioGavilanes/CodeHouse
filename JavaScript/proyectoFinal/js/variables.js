@@ -19,3 +19,6 @@ let bag = 0;
 
 //Used as default for menu in main.js
 let answer = "S"
+
+let itemBagArray = [];
+// storeItems[itemId - 1].stock -= quantity;
