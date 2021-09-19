@@ -66,8 +66,6 @@ function updateBag () {
   let addItem = bagButtonClicked.parentElement
   let itemPrice = parseFloat(addItem.getElementsByClassName('price')[0].innerText.substring(2))
   bag = bag + itemPrice
-  //console.log(bag);
-
 }
 
 /*----------------------------------------------------------------------------------------------------------

@@ -57,3 +57,6 @@ const storeItems = [
     {id: 18, title: "Adidas Yeezy 700 V3", colorway: "Arzareth Colorway", brand: "adidas", collab: "yeezy", 
     type: "low", reviews: 73, colorPrimary: "blue", colorSecondary: "white", stock: 3, price: 250, imgsrc: "img/yeezy700.svg"}
 ]
+
+
+const colors = ['white','green','black','yellow','red','orange','blue','purple','grey','pink','burgundy','beige']
