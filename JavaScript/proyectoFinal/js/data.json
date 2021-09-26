@@ -21,7 +21,7 @@
     "type": "low", "reviews": 32, "colorPrimary": "green", "colorSecondary": "purple", "stock": 2, "price": 160, "imgsrc": "img/nb990.svg"},
 
     {"id": 8, "title": "New Balance 2002R x Salehe Bembury", "colorway": "Peace Be The Journey Colorway", "brand": "newbalance", "collab": null, 
-    "type": "low", "reviews": 39, "colorPrimary": "orange", "colorSecondary": null, "stock": 3, "price": 125, "imgsrc": "img/nb2002.svg"},
+    "type": "low", "reviews": 39, "colorPrimary": "orange", "colorSecondary": null, "stock": 3, "price": 125, "imgsrc": "img/nb2002R.svg"},
 
     {"id": 9, "title": "Nike Air Zoom Alphafly Next%", "colorway": "Racer Blue / Pink Glow Colorway", "brand": "nike", "collab": null, 
     "type": "low", "reviews": 21, "colorPrimary": "black", "colorSecondary": "green", "stock": 1, "price": 220, "imgsrc": "img/nikealphafly.svg"},
@@ -33,7 +33,7 @@
     "type": "high", "reviews": 58, "colorPrimary": "white", "colorSecondary": "red", "stock": 3, "price": 190, "imgsrc": "img/offjordan1.svg"},
 
     {"id": 12, "title": "Nike Dunk Low x OFF-WHITE", "colorway": "Pine Green Colorway", "brand": "nike", "collab": "offwhite", 
-    "type": "low", "reviews": 52, "colorPrimary": "green", "colorSecondary": "orange", "stock": 3, "price": 180, "imgsrc": "img/offlowdunk.svg"},
+    "type": "low", "reviews": 52, "colorPrimary": "green", "colorSecondary": "orange", "stock": 3, "price": 180, "imgsrc": "img/offdunklow.svg"},
 
     {"id": 13, "title": "Nike Zoom Tempo NEXT% x OFF-WHITE", "colorway": "Racer Blue / Pink Glow Colorway", "brand": "nike", "collab": "offwhite",
     "type": "low", "reviews": 12, "colorPrimary": "pink", "colorSecondary": "purple", "stock": 1, "price": 260, "imgsrc": "img/offnikezoom.svg"},

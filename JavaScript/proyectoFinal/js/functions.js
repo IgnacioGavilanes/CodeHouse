@@ -4,15 +4,16 @@ THE WEB APP LOGIC.
 it consumes variables.js and data.js.
 ----------------------------------------------------------------------------------------------------------*/
 
-
-
-
 /*----------------------------------------------------------------------------------------------------------
 This function is used in order to display the main menu. It uses forEach to iterate over the array of products
 and creates a list of them for the user to select one. Also contains an exit option (used to break the loop in main.js).
 Returns
 - variable menu with all products in array ordered by id. 
 ----------------------------------------------------------------------------------------------------------*/
+// let total = bag * taxValue * quantity
+
+
+
 // const mainMenu =() => {
 //     let menu = "Seleccione el producto que desee comprar: \n";
 //     storeItems.forEach((item, i) => menu += i+1 + ".- " + item.title + "\n");
