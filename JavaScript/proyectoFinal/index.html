@@ -14,19 +14,8 @@
     <nav class="navbar">
         <ul>
             <li class="logo menu">
-                <a href="">
-                    <img src="img/logo.svg" alt="">
-                </a>
-            </li>
-            <li class="navlinks menu">
-                <a href="#" class="menu-text">Home</a>
-            </li>
-            <li class="navlinks menu">
-                <a href="#" class="menu-text">Contact</a>
-            </li>
-            <li class="navlinks menu">
-                <a href="#">
-                    <img src="img/wishlist.svg" alt="" id="wishlist">
+                <a href="http://localhost:8000">
+                    <img src="img/logo.svg\" alt="">
                 </a>
             </li>
             <li class="navlinks menu">
@@ -37,7 +26,17 @@
                     </span>
                 </a>
             </li>
-            <!--Coming soon section???-->
+            <li class="navlinks menu">
+                <a href="#">
+                    <img src="img/wishlist.svg" alt="" id="wishlist">
+                </a>
+            </li>
+            <li class="navlinks menu" id="scroll-contact">
+                <a href="#contact-form" class="menu-text">Contact</a>
+            </li>
+            <li class="navlinks menu">
+                <a href="http://localhost:8000" class="menu-text">Home</a>
+            </li>
         </ul>
 
          <!--BURGER MENU (filters & contact)-->
@@ -68,54 +67,59 @@
             <!-- <i class="fas fa-angle-double-right arrow-left"></i>
         </span> -->
         <div class="filters">
-            <p class="filter-type">Type</p><br>
-            <label for="Low" class="filter-subtype">Low</label>
-            <input type="radio" class="filter-subtype" name="Low">
-            <label for="High" class="filter-subtype">High</label>
-            <input type="radio" class="filter-subtype" name="High">
-            <label for="All" class="filter-subtype">All</label>
-            <input type="radio" class="filter-subtype" name="All">
+            <form id="typeForm">Type<br>
+                <!-- <p class="filter-type">Type</p><br> -->
 
+                <label for="Low" class="filter-subtype">Low</label>
+                <input type="radio" class="filter-subtype" name="type" value="low">
+
+                <label for="High" class="filter-subtype">High</label>
+                <input type="radio" class="filter-subtype" name="type" value="high">
+
+                <label for="All" class="filter-subtype">All</label>
+                <input type="radio" class="filter-subtype" name="type" value="all">
+            </form>
             <hr>
 
-            <p class="filter-type">Size</p><br>
-            <input type="checkbox" class="filter-subtype" name="">
+            <!-- <p class="filter-type">Size</p><br>
+            <input type="checkbox" class="filter-subtype" name=""> -->
             
-            <hr>
+            <!-- <hr> -->
 
             <p class="filter-type">Price Range</p><br>
-            <input type="range" class="filter-subtype">
+            <input type="range" class="filter-subtype" id="range" value="375" min="120" max="375">
+            <output type="text" id="textInput" value=''></output>
 
             <hr>
 
             <p class="filter-type">Color</p><br>
                 <label for="Green" class="filter-subtype">Green</label>
-                <input type="checkbox" class="filter-subtype" name="Green">
+                <input type="checkbox" class="filter-subtype colorFilter" name="Green" id="1">
                 <label for="Black" class="filter-subtype">Black</label>
-                <input type="checkbox" class="filter-subtype" name="Black"><br>
+                <input type="checkbox" class="filter-subtype colorFilter" name="Black" id="2"><br>
                 <label for="White" class="filter-subtype">White</label>
-                <input type="checkbox" class="filter-subtype" name="White">
+                <input type="checkbox" class="filter-subtype colorFilter" name="White" id="3">
                 <label for="Yellow" class="filter-subtype">Yellow</label>
-                <input type="checkbox" class="filter-subtype" name="Yellow"><br>
+                <input type="checkbox" class="filter-subtype colorFilter" name="Yellow" id="4"><br>
                 <label for="Pink" class="filter-subtype">Pink</label>
-                <input type="checkbox" class="filter-subtype" name="Pink">
+                <input type="checkbox" class="filter-subtype colorFilter" name="Pink" id="5">
                 <label for="Purple" class="filter-subtype">Purple</label>
-                <input type="checkbox" class="filter-subtype" name="Purple"><br>
+                <input type="checkbox" class="filter-subtype colorFilter" name="Purple" id="6"><br>
                 <label for="Blue" class="filter-subtype">Blue</label>
-                <input type="checkbox" class="filter-subtype" name="Blue">
+                <input type="checkbox" class="filter-subtype colorFilter" name="Blue" id="7">
                 <label for="Red" class="filter-subtype">Red</label>
-                <input type="checkbox" class="filter-subtype" name="Red"><br>
+                <input type="checkbox" class="filter-subtype colorFilter" name="Red" id="8"><br>
                 <label for="Orange" class="filter-subtype">Orange</label>
-                <input type="checkbox" class="filter-subtype" name="Orange">
+                <input type="checkbox" class="filter-subtype colorFilter" name="Orange" id="9">
                 <label for="Burgundy" class="filter-subtype">Burgundy</label>
-                <input type="checkbox" class="filter-subtype" name="Burgundy"><br>
+                <input type="checkbox" class="filter-subtype colorFilter" name="Burgundy" id="10"><br>
                 <label for="Grey" class="filter-subtype">Grey</label>
-                <input type="checkbox" class="filter-subtype" name="Grey">
+                <input type="checkbox" class="filter-subtype colorFilter" name="Grey" id="11">
                 <label for="Beige" class="filter-subtype">Beige</label>
-                <input type="checkbox" class="filter-subtype" name="Beige">
+                <input type="checkbox" class="filter-subtype colorFilter" name="Beige" id="12">
                 <hr>
-            <input type="submit" class="filter-subtype">
-            <input type="reset" class="filter-subtype">
+            <input type="submit" class="filter-subtype" id="apply-filter">
+            <input type="reset" class="filter-subtype" id="reset-filter">
         </div>
     </div>
 
@@ -124,6 +128,18 @@
         <div class="grid" id="product-grid">
             <!--DYNAMICALLY GENERATED PRODUCT CARDS-->
         </div> 
+        <hr>
+        <h1 id='contact-form'>Contact Us</h1>
+        <form action="">
+            <label for="">Name</label>
+            <input type="text"> <br>
+            <label for="">Email</label>
+            <input type="email"> <br>
+            <label for="">Message</label>
+            <textarea rows="4" cols="50"></textarea> <br>
+            <input type="submit" value='Send Message'>
+
+        </form>
     </main>
 
     <!--FOOTER - SOCIAL MEDIA & EMAIL-->
@@ -149,9 +165,16 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="js/variables.js"></script>
-    <script src="js/data.js"></script>
+    <!-- <script src="js/data.js"></script> -->
     <script src="js/functions.js"></script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/jquery-smooth-scroll@2.2.0/jquery.smooth-scroll.min.js"></script>
+
+    
+
     <script src="js/main.js"></script>
+    
 
     
     

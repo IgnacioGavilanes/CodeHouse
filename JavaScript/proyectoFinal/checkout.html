@@ -1,12 +1,151 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="overflow-y: scroll;">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="img/favicon.svg">
+    <link rel="stylesheet" href="all.min.css">
+    <title>Checkout</title>
 </head>
 <body>
-    checkout
-</body>
+     <!--NAV BAR-->
+    <nav class="co-navbar">
+        <ul> 
+            <li class="logo menu">
+                <a href="">
+                    <img src="img/logo.svg" alt="">
+                </a>
+            </li>
+            <li class="navlinks menu">
+                <a href="#">
+                    <img src="img/bag.svg" alt="" id="bag">
+                    <span id="counter">
+                        <!--aca va el numero de items-->
+                    </span>
+                </a>
+            </li>
+            <li class="navlinks menu">
+                <a href="#">
+                    <img src="img/wishlist.svg" alt="" id="wishlist">
+                </a>
+            </li>
+            <li class="navlinks menu" id="scroll-contact">
+                <a href="#contact-form" class="menu-text">Contact</a>
+            </li>
+            <li class="navlinks menu">
+                <a href="index.html" class="menu-text">Home</a>
+            </li>
+        </ul>
+    </nav>
+
+
+     <!--SCROLLING BAR:  Find alternative, marquee has been deprecated...-->
+    <div class="co-promocode"> 
+        <marquee behavior="scroll" direction="left" scrolldelay = 60>
+            FREE SHIPPING WITH CODE: CODERHOUSE <i class="separator">//</i> 
+        </marquee>
+    </div>
+
+
+    <main>
+        <!--PRODUCT GRID-->
+        <h1 id='checkout-title'>Your Bag</h1>
+        <div id="checkout-grid">
+            <!--DYNAMICALLY GENERATED PRODUCT CARDS-->
+        </div> 
+
+        <div>
+            <form action="">
+                <label for="coupon">Do you have any coupons?</label>
+                <input type="text" name='coupon' id="coupon">
+                <button type="submit">Apply</button>
+            </form>
+            <div id="pretotal">
+                <div>
+                    <h2>Shipping</h2>
+                    <h2>$PLACEHOLDER</h2>
+                </div> 
+                <hr>
+                <div>
+                    <h2>Pre-total</h2>
+                    <h2 id="pre-total">$PLACEHOLDER</h2>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div id="info-checkout">
+            <div id='personal-info'>
+                <h2>Personal Information</h2>
+                <form action="">
+                    <label for="name">Name</label>
+                    <input type="text" name="name">
+                    <label for="email">Email</label>
+                    <input type="text" name="email">
+                    <label for="phone">Phone</label>
+                    <input type="text" name="phone">
+                </form>
+            </div>
+            <div id='payment-info'>
+                <h2>Payment Information</h2>
+                <form action="">
+                    <label for="ccn">Credit Card Number</label>
+                    <input type="text" name="ccn">
+                    <label for='name'>Name</label>
+                    <input type="text" name="name">
+                    <label for="date">Valid Thru</label>
+                    <input type="text" name="date">
+                    <label for="cvc">CVC</label>
+                    <input type="text" name="cvc">
+                </form>
+            </div>
+        </div>
+        <div>
+            <div>
+                <h2>Tax</h2>
+                <h2>$PLACEHOLDER</h2>
+            </div>
+            <hr>
+            <div>
+                <h2>Shipping</h2>
+                <h2>$PLACEHOLDER</h2>
+            </div>
+            <hr>
+            <div>
+                <h2>Total</h2>
+                <h2>$PLACEHOLDER</h2>
+            </div>
+            <hr>
+            <button type="submit">Confirm Purchase</button>
+        </div>
+    </main>
+
+    <!--FOOTER - SOCIAL MEDIA & EMAIL-->
+    <footer>
+        <div class="footer-frame">
+            <a href="#" class="btn">
+                <i class="fab fa-twitter twitter-color"></i>
+            </a>
+            <a href="#" class="btn">
+                <i class="fab fa-instagram instagram-color"></i>
+            </a>
+            <a href="#" class="btn">
+                <i class="fab fa-facebook-f facebook-color"></i>
+            </a>
+            <a href="#" class="btn">
+                <i class="fab fa-youtube youtube-color"></i>
+            </a>
+            <a href="#" class="btn">
+                <i class="fas fa-inbox inbox-color"></i>
+            </a>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/variables.js"></script>
+    <script src="js/data.js"></script>
+    <!-- <script src="js/functions.js"></script>
+    <script src="js/main.js"></script> -->
+    </body>
 </html>

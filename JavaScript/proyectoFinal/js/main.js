@@ -8,6 +8,8 @@ Dynamic products' grid: Now utilizing AJAX & JQuery
 ----------------------------------------------------------------------------------------------------------*/
 let total = bag * taxValue * quantity
 
+let itemStock = ''
+
 $.getJSON(JSONurl, function (response, status) {
   if (status === "success"){
     let dataArray = response;
@@ -17,15 +19,76 @@ $.getJSON(JSONurl, function (response, status) {
                               <img src="${info.imgsrc}" class="item-img" alt="">
                               <h1 class="name">${info.title}</h1>
                               <h3 class="colorway">${info.colorway}</h3>
-                              <input type="image" src="img/in-wishlist.svg" class="itemcontainer add-wishlist" id="wishlistButton-card"/>
+                              <input type="image" src="img/in-wishlist.svg" class="itemcontainer add-wishlist" />
                               <h2 class="price itemcontainer">$ ${info.price}</h2>
-                              <input type="image" src="img/in-bag.svg" class="itemcontainer add-bag" id="bagButton-card"/>
+                              <input type="image" src="img/in-bag.svg" class="itemcontainer add-bag"/>
                               <p class="reviews"> ${info.reviews} 🔥</p> 
                             </div>`)
-    }
-}
-})
 
+      //GET STOCK FOR EACH ITEM AND SAVE IT IN A VARIABLE WITH DIFF NAME
+      //FOR EACH ELEMENT. EL SCOPE DE ESTAS VARIABLES ES SOLO DENTRO DE ESTE FOR LOOP...
+      itemStock = info.stock
+      
+      
+      
+      let itemReviews = info.reviews
+      let itemcolorPrimary = info.colorPrimary
+      let itemQttycolorSecondary = info.colorSecondary
+      let itemPrice = info.price
+      function updateTextInput(max) {
+        $('#textInput').value=max; 
+        $('#textInput').empty().append("$0 - $" + max)
+        if (itemPrice > max) {
+          info.hide()
+        }
+      }
+      $("#range").change(function (e) {updateTextInput(this.value)})
+      
+
+    } //cierra el for loop
+
+  
+    //si cliqueo en uno de los botones filtro colores agrega
+    //el color a colorArray
+    let colorArray = []
+        for (let i =0; i<= colorArray.length; i++) {
+          $(".colorFilter").change(function (e) { 
+            colorArray.push(e.target.name.toLowerCase())
+            console.log(colorArray)
+          })
+        }
+
+      // const a1 = ["a", "b", "c", "t"];
+      // const a2 = ["d", "a", "t", "e", "g"];
+
+      // console.log( a2.filter(x => !a1.includes(x)) );
+
+        
+
+        let filteredColorArray = []
+          $.grep( [dataArray], function(n) {
+            target = (n.colorPrimary || n.colorSecondary)
+            if (n.includes(colorArray)) {
+              console.log(n.colorPrimary, n.colorSecondary)
+              return n
+
+            }
+
+            
+            
+            // if(colorArray.filter(target => !filteredColorArray.includes((target)))) {
+            //   console.log(n.colorPrimary)
+            //   return true
+            // }
+            // else {
+            //   console.log()
+            //   return false
+            // }
+          });
+  }
+    }
+
+)
 /*----------------------------------------------------------------------------------------------------------
 Executes the following once the DOM is loaded
 ----------------------------------------------------------------------------------------------------------*/
@@ -56,17 +119,17 @@ $(document).ready(function(){
 
       let bagButtonClicked = event.target
       let addItem = bagButtonClicked.parentElement
-      
 
-      
-      //NO PUDE LOGRAR UTILIZAR SELECTORES JQUERY PARA RECREAR ESTA ACCION  
-      let itemPrice = addItem.getElementsByClassName('price')[0].innerText;
-      let itemName = addItem.getElementsByClassName('name')[0].innerText;
+      // let itemPrice = addItem.getElementsByClassName('price')[0].innerText;
+      let itemPrice = $(this).parent().find('h2').html()
+      // let itemName = addItem.getElementsByClassName('name')[0].innerText;
+      let itemName = $(this).parent().find('h1').html()
 
       let itemImgSrc = $(this).parent().find('img').attr('src');
+      let itemColorway = $(this).parent().find('h3').html()
 
       //Once an product's bag icon is clicked, that items price, name, and imgsrc is pushed into the bagArray
-      bagArray.push({itemName, itemPrice, itemImgSrc})    
+      bagArray.push({itemName, itemColorway, itemPrice, itemImgSrc})    
       
       /*----------------------------------------------------------------------------------------------------------
       THIS SHORT SNIPPET IS UTILIZED FOR THE ITEMS COUNTER ON TOP OF THE BAG ICON INSIDE THE NAVBAR.
@@ -90,6 +153,7 @@ $(document).ready(function(){
       {
         htmlBagAlert += `<img class='bagalert-img' src="${this.itemImgSrc}">
                         <h2>${this.itemName}</h2>
+                        <h4>${this.itemColorway}</h4>
                         <h3>${this.itemPrice}</h3>
                         <br>` 
       });
@@ -109,28 +173,29 @@ $(document).ready(function(){
           //Need to add item name, img, price, qtty, total
         }).then(function (result) {
           if (result.isConfirmed) {
+            //NUEVO, HASTA LINEA 118
+            let num = 0
+            // for (const identificator of bagArray) {
+            //   num++
+            //   localStorage.setItem(num, JSON.stringify({identificator}))
+            //   }
+            for (let i = 0; i<= bagArray.length; i++) {
+              num++
+              localStorage.setItem(num, JSON.stringify(bagArray[i]))
+              window.localStorage.removeItem(bagArray.length + 1);
+              }
             window.location = "checkout.html"
           }
         })
       },)
 
       /*----------------------------------------------------------------------------------------------------------
-      SAVING ITEMS IN BAG TO LOCAL STORAGE
-      ----------------------------------------------------------------------------------------------------------*/
-      let num = 0
-      for (const identificator of bagArray) {
-        num++
-        if (identificator.itemName === itemName) {
-          localStorage.setItem(itemName + num, JSON.stringify({identificator}))
-        }
-      }
-      /*----------------------------------------------------------------------------------------------------------
       TOAST NOTIFICATION TO ALERT USER THAT AN ITEM HAS BEEN ADDED TO THE SHOPPING BAG
       Functionalities:
       - Creates timed Toast notification displaying item name
       ----------------------------------------------------------------------------------------------------------*/
       Swal.fire({
-        position: 'top-end',
+        position: 'bottom-end',
         toast:true,
         icon: 'success',
         background: 'white',
@@ -165,22 +230,165 @@ function updateBag () {
       "width":"15rem"
     })
   })
+  
+  ///THIS IS TESTING WISHLIST POPUP
+  let wlArray = []
+  let wishlistButton = $(".add-wishlist"); 
+    for (let i = 0; i < wishlistButton.length; i++) {
+      $(wishlistButton[i]).on('click', addToWishlistEvent);
+      function addToWishlistEvent (event) {
+        // let wishlistButtonClicked = event.target
+        // let cardItem = wishlistButtonClicked.parentElement
+        let wlItemPrice = $(this).parent().find('h2').html()
+        let wlItemName = $(this).parent().find('h1').html()
+        let wlItemImgSrc = $(this).parent().find('img').attr('src');
+        let wlItemColorway = $(this).parent().find('h3').html()
+
+        wlArray.push({wlItemName, wlItemColorway, wlItemPrice, wlItemImgSrc})    
+
+        let htmlWLAlert = ``;
+        $.each(wlArray, function()
+        {
+          htmlWLAlert += `<img class='bagalert-img' src="${this.wlItemImgSrc}">
+                          <h2>${this.wlItemName}</h2>
+                          <h4>${this.wlItemColorway}</h4>
+                          <h3>${this.wlItemPrice}</h3>
+                          <button type='submit'>Add To Bag</button>
+                          <br>` 
+        });
+
+        $("#wishlist").click(function(){
+        Swal.fire({
+          title: 'Your Wishlist',
+          showLoaderOnConfirm: false,
+          html: `<hr> <br> ${htmlWLAlert}`,
+
+          width: 800,
+          showCloseButton: true,
+        })})
+
+        $(".add-wishlist").click(function(){
+          Swal.fire({
+            position: 'top-end',
+            toast:true,
+            icon: 'success',
+            background: 'white',
+            html: `<b>${wlItemName}</b> is now in your Wish List!`,
+            showConfirmButton: false,
+            timer: 2000,
+          }
+          )});
+
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /*----------------------------------------------------------------------------------------------------------
+  SAVING ITEMS IN BAG TO LOCAL STORAGE
+  ----------------------------------------------------------------------------------------------------------*/
+  // let num = 0
+  // for (const identificator of bagArray) {
+  //   num++
+  //   if (identificator.itemName === itemName) {
+  //     localStorage.setItem(itemName + num, JSON.stringify({identificator}))
+  //   }
+  // }
+
+  //lo pase a cuando hago click en el boton de ir al checkout para pasarlo a checkout.html
+  /*----------------------------------------------------------------------------------------------------------
+  TOAST NOTIFICATION TO ALERT USER THAT AN ITEM HAS BEEN ADDED TO THE SHOPPING BAG
+  Functionalities:
+  - Creates timed Toast notification displaying item name
+  ----------------------------------------------------------------------------------------------------------*/
 
   
+  
+  
 
+/*----------------------------------------------------------------------------------------------------------
+SMOOTH SCROLL JQUERY PLUGIN 
+Functionalities:
+- Smooth scroll to contact section from navbar
+----------------------------------------------------------------------------------------------------------*/
+
+  let contactLink = $('#scroll-contact');
+  let contactForm = $("#contact-form")
+
+  contactLink.on('click', function() {
+    $.smoothScroll({
+      scrollTarget: contactForm,
+      speed: 800,
+    });
+    return false;
+  });
 
 });//$(document).ready CLOSING TAG
 
 
-//WISHLIST TOAST - WORK IN PROGRESS
-$("#wishlist").click(function(){
-  Swal.fire({
-    html: '<hr>',
-    title: 'Your Wishlist',
-    width: 800,
-    showLoaderOnConfirm: true,
-    showCloseButton: true,
-  })})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
   /*----------------------------------------------------------------------------------------------------------
@@ -318,3 +526,70 @@ function newProduct(id, title, colorway, brand, collab, type, reviews, colorPrim
   //     return true
   // }
 //}
+
+
+
+
+
+
+
+
+
+
+
+
+/// Filters ANDAN TODOS!!!
+
+//Type Filter
+let filteredType
+$('#typeForm input').on('change', function() {
+  filteredType = $('input[name=type]:checked', '#typeForm').val()
+  console.log(filteredType); 
+ });
+
+
+ //Price Filter
+//Appends Price range (max)
+function updateTextInput(max) {
+  $('#textInput').value=max; 
+  $('#textInput').empty().append("$0 - $" + max)
+}
+$("#range").change(function (e) {updateTextInput(this.value)})
+
+//Color Filter
+
+// let colorArray = []
+// for (let i =0; i<= colorArray.length; i++) {
+//   $(".colorFilter").change(function (e) { 
+//     colorArray.push(e.target.name.toLowerCase())
+//     console.log(colorArray)
+//   })
+// }
+
+
+
+
+
+
+
+///SCROLL TO CONTACT SECTION
+
+
+
+// function ScrollToContact() {
+//   document.getElementsByTagName('h2')[3].scrollIntoView();
+//   $('#scroll-contact')[3].scrollIntoView();
+  // will scroll to 4th h3 element
+// }
+
+// <div id="my_element">
+// </div>
+
+
+
+
+// contactLink.scrollIntoView({
+//   behavior: "smooth",
+  // inline: "#contact-form",
+// });
+
