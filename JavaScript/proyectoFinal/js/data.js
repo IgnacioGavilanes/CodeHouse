@@ -142,7 +142,7 @@ for (let iterator = 0; iterator <= checkoutItems.length; iterator++) {
 //IF I DECIDE TO ERASE THE LAST LOOP THAT POPULATES CHECKOUTITEMSINFO 
 //I NEED TO CHANGE CHECKOUTINTEMSINFO HERE TO CHECKOUTINTEMS
 let itemQtty = 1
-for (let i = 0; i <checkoutItemsInfo.length; i++) {
+for (let i = 0; i <checkoutItems.length; i++) {
     let parentNode = $("#checkout-grid");
 
     //ACA TENGO QUE AGREGAR QTTY Y .HIDE SI EL ELEMENTO YA EXISTE
@@ -156,7 +156,36 @@ for (let i = 0; i <checkoutItemsInfo.length; i++) {
             </div>
             <h3 class='qtty'>X qtty${itemQtty}</h3>
             <h2 class="co-price">${checkoutItemsInfo[i].itemPrice}</h2>
+            <input id='co-remove' type="image" src="img/trash.svg"/>
         </div>
         <hr class="co-separator">
     `);
 }
+
+
+
+function generateId() {
+    var orderId = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for (var i = 0; i < 15; i++)
+        orderId += possible.charAt(Math.floor(Math.random() * possible.length));
+    return orderId;
+  }
+
+
+
+$("#finalize").click(function(){
+    Swal.fire({
+      title: 'Thank you for your order!',
+      width: 800,
+      showLoaderOnConfirm: false,
+      confirmButtonText: 'Take me to the homepage',
+      showCloseButton: true,
+      confirmButtonColor: '#3085d6',
+      html: `Here is your order ID: ${generateId()}`+
+      `<br>
+      We will get back to you as soon as we have more information
+      regarging your order's shipping`,
+    }).then(function (result) {
+      if (result.isConfirmed) {
+        window.location = "http://localhost:8000"}})})

@@ -1,12 +1,12 @@
 [
     {"id": 1, "title": "New Balance 327 x Casablanca", "colorway": "Green Logo Colorway", "brand": "newbalance", "collab": "casablanca", 
-    "type": "low", "reviews": 22, "colorPrimary": "white", "colorSecondary": "green", "stock": 3, "price": 120, "imgsrc": "img/327casablanca.svg"},
+    "type": "low", "reviews": 22, "colorPrimary": "white", "colorSecondary": "green", "stock": 3, "price": 120.00, "imgsrc": "img/327casablanca.svg"},
 
     {"id": 2, "title": "Adidas Ozweego x Raf Simons", "colorway": "Bright Yellow Night Navy Colorway", "brand": "adidas", "collab": "rafsimons", 
-    "type": "low", "reviews": 22, "colorPrimary": "yellow", "colorSecondary": "black", "stock": 2, "price": 170, "imgsrc": "img/adidasraf.svg"},
+    "type": "low", "reviews": 24, "colorPrimary": "yellow", "colorSecondary": "black", "stock": 2, "price": 179.99, "imgsrc": "img/adidasraf.svg"},
 
     {"id": 3, "title": "Balenciaga Triple S", "colorway": "Red / Black Colorway", "brand": "balenciaga", "collab": null,
-    "type": "low", "reviews": 67, "colorPrimary": "black", "colorSecondary": "red", "stock": 1, "price": 300, "imgsrc": "img/balenciagasss.svg"},
+    "type": "low", "reviews": 67, "colorPrimary": "black", "colorSecondary": "red", "stock": 1, "price": 299.99, "imgsrc": "img/balenciagasss.svg"},
 
     {"id": 4, "title": "Balenciaga Track", "colorway": "Orange / Blue Colorway", "brand": "balenciaga", "collab": null, 
     "type": "low", "reviews": 44, "colorPrimary": "orange", "colorSecondary": "blue", "stock": 2, "price": 375, "imgsrc": "img/balenciagatrack.svg"},

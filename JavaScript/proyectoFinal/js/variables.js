@@ -22,3 +22,15 @@ let bagArray = [];
 const JSONurl = "./js/data.json"
 
 //jQuery selector for all the add to bag buttons on our products' cards
+
+
+//Product card
+
+
+
+
+
+
+
+
+

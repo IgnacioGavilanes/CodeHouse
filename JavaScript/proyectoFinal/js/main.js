@@ -14,81 +14,126 @@ $.getJSON(JSONurl, function (response, status) {
   if (status === "success"){
     let dataArray = response;
     let parentNode = $("#product-grid");
+
+
+    //Type Filter
+    let filteredType = ''
+    //   function updateFilteredType() {
+    //     filteredType = $('input[name=type]:checked', '#typeForm').val()
+    // }
+    
+    //   $('#typeForm input').on('change', updateFilteredType() );
+
+    //   console.log(filteredType)
+
+
+    //Gets the user selection for type (on filters side-menu)
+    $('#typeForm input').on('change', function() {
+      filteredType = $('input[name=type]:checked', '#typeForm').val()
+    });
+
+    
+
+
     for (const info of dataArray){
-      $(parentNode).append(`<div class="card" id=${info.id}>
-                              <img src="${info.imgsrc}" class="item-img" alt="">
-                              <h1 class="name">${info.title}</h1>
-                              <h3 class="colorway">${info.colorway}</h3>
-                              <input type="image" src="img/in-wishlist.svg" class="itemcontainer add-wishlist" />
-                              <h2 class="price itemcontainer">$ ${info.price}</h2>
-                              <input type="image" src="img/in-bag.svg" class="itemcontainer add-bag"/>
-                              <p class="reviews"> ${info.reviews} 🔥</p> 
-                            </div>`)
 
-      //GET STOCK FOR EACH ITEM AND SAVE IT IN A VARIABLE WITH DIFF NAME
-      //FOR EACH ELEMENT. EL SCOPE DE ESTAS VARIABLES ES SOLO DENTRO DE ESTE FOR LOOP...
-      itemStock = info.stock
-      
-      
-      
-      let itemReviews = info.reviews
-      let itemcolorPrimary = info.colorPrimary
-      let itemQttycolorSecondary = info.colorSecondary
-      let itemPrice = info.price
-      function updateTextInput(max) {
-        $('#textInput').value=max; 
-        $('#textInput').empty().append("$0 - $" + max)
-        if (itemPrice > max) {
-          info.hide()
-        }
-      }
-      $("#range").change(function (e) {updateTextInput(this.value)})
-      
-
-    } //cierra el for loop
-
-  
-    //si cliqueo en uno de los botones filtro colores agrega
-    //el color a colorArray
-    let colorArray = []
-        for (let i =0; i<= colorArray.length; i++) {
-          $(".colorFilter").change(function (e) { 
-            colorArray.push(e.target.name.toLowerCase())
-            console.log(colorArray)
-          })
-        }
-
-      // const a1 = ["a", "b", "c", "t"];
-      // const a2 = ["d", "a", "t", "e", "g"];
-
-      // console.log( a2.filter(x => !a1.includes(x)) );
-
-        
-
-        let filteredColorArray = []
-          $.grep( [dataArray], function(n) {
-            target = (n.colorPrimary || n.colorSecondary)
-            if (n.includes(colorArray)) {
-              console.log(n.colorPrimary, n.colorSecondary)
-              return n
-
+        function createCard () {
+          $(parentNode).append(`<div class="card" id=${itemId}>
+                                  <img src="${itemImgSrc}" class="item-img" alt="">
+                                  <h1 class="name">${itemTitle}</h1>
+                                  <h3 class="colorway">${itemColorway}</h3>
+                                  <input type="image" src="img/in-wishlist.svg" class="itemcontainer add-wishlist" />
+                                  <h2 class="price itemcontainer">$ ${itemPrice}</h2>
+                                  <input type="image" src="img/in-bag.svg" class="itemcontainer add-bag"/>
+                                  <p class="reviews"> ${itemReviews} 🔥</p> 
+                                </div>`)
             }
 
-            
-            
-            // if(colorArray.filter(target => !filteredColorArray.includes((target)))) {
-            //   console.log(n.colorPrimary)
-            //   return true
-            // }
-            // else {
-            //   console.log()
-            //   return false
-            // }
-          });
-  }
-    }
+      //getting most properties into varibles for each object in dataArray
+      let itemType = info.type
+      let itemPrice = info.price
+      let itemColorPrimary = info.colorPrimary
+      let itemColorSecondary = info.colorSecondary
 
-)
+      let itemId = info.id
+      let itemImgSrc = info.imgsrc
+      let itemTitle = info.title
+      let itemColorway = info.colorway
+      let itemReviews = info.reviews
+      let itemStock = info.stock
+
+
+
+      //Shows all products by default. This changes once the user filters them.
+      createCard ()
+
+      
+      
+      //Once the "APPLY FILTERS" button is clicked:
+      $("#apply-filter").click(function (event) {
+
+        let max = 375
+
+        function updateTextInput(max) {
+        max = $('#textInput').value; 
+        $('#textInput').empty().append("$0 - $" + max)
+        }
+        
+        $("#range").change(function (e) {updateTextInput(this.value)})
+
+        let colorArray = []
+
+        event.preventDefault();
+        colorArray = $("input:checkbox:checked").map(function(){
+          return $(this).attr('name').toLowerCase();
+        }).get();
+
+
+        if (itemType != filteredType || itemPrice > max || !colorArray.includes(itemColorPrimary) || !colorArray.includes(itemColorSecondary)) {
+          $(`#${itemId}`).hide()
+        }
+
+
+        // --------------------------------------------------------------------------------
+        // --------------------------------------------------------------------------------
+        // --------------------------------------------------------------------------------
+
+        // ESTOS FILTROS ANDAN TODOS BIEN POR SEPARADO, ESTO ESTA COMENTADO PARA PODER
+        // UNIR TODOS ESTOS FILTROS DENTRO DE UN SOLO IF STATEMENT...
+
+        // -------------------- TYPE FILTER --------------------
+        // if (itemType != filteredType) {
+        //   $(`#${itemId}`).hide()
+        // }
+
+        // -------------------- PRICE FILTER --------------------
+        // function updateTextInput(max) {
+        // $('#textInput').value=max; 
+        // $('#textInput').empty().append("$0 - $" + max)
+        // if (itemPrice > max) {
+        //   $(`#${itemId}`).hide()
+        // }
+        // }
+        // $("#range").change(function (e) {updateTextInput(this.value)})
+
+        // -------------------- COLOR FILTER --------------------
+        // let colorArray = []
+
+        // event.preventDefault();
+        // colorArray = $("input:checkbox:checked").map(function(){
+        //   return $(this).attr('name').toLowerCase();
+        // }).get();
+
+
+        // if (!colorArray.includes(itemColorPrimary) || !colorArray.includes(itemColorSecondary)) {
+        //     $(`#${itemId}`).hide()
+        //   }
+      }
+    )}//cierra el for loop
+  }
+})
+
+
 /*----------------------------------------------------------------------------------------------------------
 Executes the following once the DOM is loaded
 ----------------------------------------------------------------------------------------------------------*/
@@ -155,6 +200,7 @@ $(document).ready(function(){
                         <h2>${this.itemName}</h2>
                         <h4>${this.itemColorway}</h4>
                         <h3>${this.itemPrice}</h3>
+                        <input class='remove' type="image" src="img/trash.svg"/>
                         <br>` 
       });
       
@@ -254,6 +300,8 @@ function updateBag () {
                           <h4>${this.wlItemColorway}</h4>
                           <h3>${this.wlItemPrice}</h3>
                           <button type='submit'>Add To Bag</button>
+                          <input class='remove' type="image" src="img/trash.svg"/>
+
                           <br>` 
         });
 
@@ -344,6 +392,108 @@ Functionalities:
     return false;
   });
 
+
+
+
+
+
+
+
+
+    /*----------------------------------------------------------------------------------------------------------
+  Manipulates DOM depending on whether the review button is clicked (upvoted) or deselected.
+  Funcionaba antes pero tengo que actualizarla...
+  ----------------------------------------------------------------------------------------------------------*/
+ orange = "#FF8021"
+    
+  $(".reviews").click(function () {
+    let reviewNum = parseInt(this.innerText);
+    console.log(reviewNum)
+    
+    if (this.style.color == "black") {
+      this.style.color = orange;
+      this.style.fontWeight = "bold";
+
+      function addReview () {
+        // console.log(reviewNum);
+        let reviewId = $(this.attr('id'))
+        console.log(reviewId)
+        $(".reviews").html(reviewNum + 1);
+      }
+
+      addReview();
+    }
+    
+    // else {
+    //   this.style.color = "black";
+    //   this.style.fontWeight = "normal";
+
+    //   function subtractReview() {
+    //     // console.log(reviewNum);
+    //     $(".reviews").html(reviewNum - 1);
+    //   }
+    //   subtractReview();
+    // }
+  });
+
+
+
+
+
+
+
+
+  let userName = $("#message-name").value
+
+  $("#send").click(function(){
+    Swal.fire({
+      title: 'Your message has been sent!',
+      showLoaderOnConfirm: false,
+      html: `We will get back to you shortly, ${userNaem} 😉`,
+
+      width: 800,
+      showCloseButton: true,
+    })})
+
+
+
+
+//PARA QUE LA BARRA DE FILTROS NO VAYA HASTA ABAJO DEL TODO.
+//SI ME SOBRA TIEMPO PUEDO INTENTAR AGREGAR ESTA FUNCIONALIDAD.
+
+  //   $.fn.scrollTo = function (position) {  
+  //     var $this = this,
+  //       $window = $(window);
+  //         $(window).scroll(function (e) {
+  //         if ($(window).scrollTop() > position) {
+  //           $this.css({
+  //                 position: 'absolute',
+  //                 top: position
+  //             });
+  //         } else {
+  //           $this.css({
+  //                 position: 'fixed',
+  //                 top: 0
+  //             });
+  //         }
+  //     });
+  // };
+
+  // $('.filterbtn-container').scrollTo(2300);
+  
+  // $('.sidebar').scrollTo(2300);
+
+
+
+
+
+
+
+
+
+
+
+
 });//$(document).ready CLOSING TAG
 
 
@@ -391,40 +541,7 @@ Functionalities:
 
 
 
-  /*----------------------------------------------------------------------------------------------------------
-  Manipulates DOM depending on whether the review button is clicked (upvoted) or deselected.
-  Funcionaba antes pero tengo que actualizarla...
-  ----------------------------------------------------------------------------------------------------------*/
- 
-    
-  $(".reviews").click(function () {
-    
-    let reviewNum = parseInt(this.innerText);
-    console.log(reviewNum)
-    
-    if (this.style.color == "black") {
-      this.style.color = "#FF8021";
-      this.style.fontWeight = "bold";
 
-      function addReview () {
-        // console.log(reviewNum);
-        $(".reviews").html(reviewNum + 1);
-      }
-
-      addReview();
-    }
-    
-    else {
-      this.style.color = "black";
-      this.style.fontWeight = "normal";
-
-      function subtractReview() {
-        // console.log(reviewNum);
-        $(".reviews").html(reviewNum - 1);
-      }
-      subtractReview();
-    }
-  });
 
 
 
@@ -541,11 +658,11 @@ function newProduct(id, title, colorway, brand, collab, type, reviews, colorPrim
 /// Filters ANDAN TODOS!!!
 
 //Type Filter
-let filteredType
-$('#typeForm input').on('change', function() {
-  filteredType = $('input[name=type]:checked', '#typeForm').val()
-  console.log(filteredType); 
- });
+// let filteredType
+// $('#typeForm input').on('change', function() {
+//   filteredType = $('input[name=type]:checked', '#typeForm').val()
+//   console.log(filteredType); 
+//  });
 
 
  //Price Filter

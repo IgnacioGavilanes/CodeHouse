@@ -15,7 +15,7 @@
         <ul>
             <li class="logo menu">
                 <a href="http://localhost:8000">
-                    <img src="img/logo.svg\" alt="">
+                    <img src="img/logo.svg" alt="">
                 </a>
             </li>
             <li class="navlinks menu">
@@ -94,29 +94,29 @@
 
             <p class="filter-type">Color</p><br>
                 <label for="Green" class="filter-subtype">Green</label>
-                <input type="checkbox" class="filter-subtype colorFilter" name="Green" id="1">
+                <input type="checkbox" class="filter-subtype colorFilter" name="Green">
                 <label for="Black" class="filter-subtype">Black</label>
-                <input type="checkbox" class="filter-subtype colorFilter" name="Black" id="2"><br>
+                <input type="checkbox" class="filter-subtype colorFilter" name="Black"><br>
                 <label for="White" class="filter-subtype">White</label>
-                <input type="checkbox" class="filter-subtype colorFilter" name="White" id="3">
+                <input type="checkbox" class="filter-subtype colorFilter" name="White">
                 <label for="Yellow" class="filter-subtype">Yellow</label>
-                <input type="checkbox" class="filter-subtype colorFilter" name="Yellow" id="4"><br>
+                <input type="checkbox" class="filter-subtype colorFilter" name="Yellow"><br>
                 <label for="Pink" class="filter-subtype">Pink</label>
-                <input type="checkbox" class="filter-subtype colorFilter" name="Pink" id="5">
+                <input type="checkbox" class="filter-subtype colorFilter" name="Pink">
                 <label for="Purple" class="filter-subtype">Purple</label>
-                <input type="checkbox" class="filter-subtype colorFilter" name="Purple" id="6"><br>
+                <input type="checkbox" class="filter-subtype colorFilter" name="Purple"><br>
                 <label for="Blue" class="filter-subtype">Blue</label>
-                <input type="checkbox" class="filter-subtype colorFilter" name="Blue" id="7">
+                <input type="checkbox" class="filter-subtype colorFilter" name="Blue">
                 <label for="Red" class="filter-subtype">Red</label>
-                <input type="checkbox" class="filter-subtype colorFilter" name="Red" id="8"><br>
+                <input type="checkbox" class="filter-subtype colorFilter" name="Red"><br>
                 <label for="Orange" class="filter-subtype">Orange</label>
-                <input type="checkbox" class="filter-subtype colorFilter" name="Orange" id="9">
+                <input type="checkbox" class="filter-subtype colorFilter" name="Orange">
                 <label for="Burgundy" class="filter-subtype">Burgundy</label>
-                <input type="checkbox" class="filter-subtype colorFilter" name="Burgundy" id="10"><br>
+                <input type="checkbox" class="filter-subtype colorFilter" name="Burgundy"><br>
                 <label for="Grey" class="filter-subtype">Grey</label>
-                <input type="checkbox" class="filter-subtype colorFilter" name="Grey" id="11">
+                <input type="checkbox" class="filter-subtype colorFilter" name="Grey">
                 <label for="Beige" class="filter-subtype">Beige</label>
-                <input type="checkbox" class="filter-subtype colorFilter" name="Beige" id="12">
+                <input type="checkbox" class="filter-subtype colorFilter" name="Beige">
                 <hr>
             <input type="submit" class="filter-subtype" id="apply-filter">
             <input type="reset" class="filter-subtype" id="reset-filter">
@@ -128,16 +128,16 @@
         <div class="grid" id="product-grid">
             <!--DYNAMICALLY GENERATED PRODUCT CARDS-->
         </div> 
-        <hr>
-        <h1 id='contact-form'>Contact Us</h1>
-        <form action="">
-            <label for="">Name</label>
+        <hr  id='contact-separator'>
+        <h1 id='contact-title'>Contact Us</h1>
+        <form action="" id='contact-form'>
+            <label for="" id='message-name' class='cf-label'>Name</label><br>
             <input type="text"> <br>
-            <label for="">Email</label>
+            <label for="" class='cf-label'>Email</label><br>
             <input type="email"> <br>
-            <label for="">Message</label>
+            <label for="" class='cf-label'>Message</label><br>
             <textarea rows="4" cols="50"></textarea> <br>
-            <input type="submit" value='Send Message'>
+            <input type="button" value='Send Message' id='send'>
 
         </form>
     </main>
@@ -167,16 +167,8 @@
     <script src="js/variables.js"></script>
     <!-- <script src="js/data.js"></script> -->
     <script src="js/functions.js"></script>
-
-    
     <script src="https://cdn.jsdelivr.net/npm/jquery-smooth-scroll@2.2.0/jquery.smooth-scroll.min.js"></script>
-
-    
-
     <script src="js/main.js"></script>
-    
-
-    
     
     </body>
 </html>
