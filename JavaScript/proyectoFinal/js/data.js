@@ -173,14 +173,15 @@ function generateId() {
   }
 
 
-
 $("#finalize").click(function(){
+    localStorage.clear();
     Swal.fire({
       title: 'Thank you for your order!',
-      width: 800,
+      width: 1200,
+      height: 1200,
+      allowOutsideClick: false,
       showLoaderOnConfirm: false,
       confirmButtonText: 'Take me to the homepage',
-      showCloseButton: true,
       confirmButtonColor: '#3085d6',
       html: `Here is your order ID: ${generateId()}`+
       `<br>
@@ -189,3 +190,47 @@ $("#finalize").click(function(){
     }).then(function (result) {
       if (result.isConfirmed) {
         window.location = "http://localhost:8000"}})})
+
+
+let pretotaaal = localStorage.getItem('total');
+pretotaaal = JSON.parse(pretotaaal)
+
+$('#pretotal-amount').empty().append(`$${pretotaaal}`)
+$('.shipping').empty().append(`$${shipping}`)
+
+
+$('#apply-coupon').click( function () {
+    let coupon = $('input[name=coupon]').val()
+    if (coupon.toLowerCase() === 'coderhouse') {
+        shipping = 0
+        $('.shipping').empty().append(`$${shipping}`)
+        $('#total').empty().append(`$${(taxValue * pretotaaal)+ pretotaaal + shipping}`)
+        Swal.fire({
+            title: 'Your coupon has been applied!',
+            color: 'white',
+            toast:true,
+            position: 'bottom-end',
+            icon: 'success',
+            showConfirmButton: false,
+            timer: 2000,
+            allowOutsideClick: false,
+            showLoaderOnConfirm: false,
+          })
+    }
+    else {
+        shipping = 20;
+        $('.shipping').empty().append(`$${shipping}`);
+        $('#total').empty().append(`$${(taxValue * pretotaaal)+ pretotaaal + shipping}`);
+        Swal.fire({
+        title: 'Invalid coupon...',
+        toast:true,
+        position: 'bottom-end',
+        icon: 'error',
+        showConfirmButton: false,
+        timer: 2000,
+        allowOutsideClick: false,
+        showLoaderOnConfirm: false,})}
+})
+
+$('.tax').empty().append(`$${taxValue * pretotaaal}`)
+$('#total').empty().append(`$${(taxValue * pretotaaal)+ pretotaaal + shipping}`)

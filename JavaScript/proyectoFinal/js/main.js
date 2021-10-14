@@ -15,84 +15,85 @@ $.getJSON(JSONurl, function (response, status) {
     let dataArray = response;
     let parentNode = $("#product-grid");
 
-
     //Type Filter
-    let filteredType = ''
-    //   function updateFilteredType() {
-    //     filteredType = $('input[name=type]:checked', '#typeForm').val()
-    // }
-    
-    //   $('#typeForm input').on('change', updateFilteredType() );
-
-    //   console.log(filteredType)
-
-
+    let type = ''
     //Gets the user selection for type (on filters side-menu)
     $('#typeForm input').on('change', function() {
-      filteredType = $('input[name=type]:checked', '#typeForm').val()
+      type = $('input[name=type]:checked', '#typeForm').val()
     });
 
+
+
+
+
+
+
+    
     
 
+        // if (this[product.stock] >= 1) {
+        //   this[product.stock] = this[product.stock] -1;
+        //   console.log(this[product.stock])
+        //   return this[product.stock]}
+        // else {
+        //   return $(`#${product.id}`).hide()
+        // }})
 
-    for (const info of dataArray){
-
-        function createCard () {
-          $(parentNode).append(`<div class="card" id=${itemId}>
-                                  <img src="${itemImgSrc}" class="item-img" alt="">
-                                  <h1 class="name">${itemTitle}</h1>
-                                  <h3 class="colorway">${itemColorway}</h3>
-                                  <input type="image" src="img/in-wishlist.svg" class="itemcontainer add-wishlist" />
-                                  <h2 class="price itemcontainer">$ ${itemPrice}</h2>
-                                  <input type="image" src="img/in-bag.svg" class="itemcontainer add-bag"/>
-                                  <p class="reviews"> ${itemReviews} 🔥</p> 
-                                </div>`)
-            }
+    for (const product of dataArray){
+      function createCard () {
+        $(parentNode).append(`<div class="card" id=${itemId}>
+                                <img src="${itemImgSrc}" class="item-img" alt="">
+                                <h1 class="name">${itemTitle}</h1>
+                                <h3 class="colorway">${itemColorway}</h3>
+                                <input type="image" src="img/in-wishlist.svg" class="itemcontainer add-wishlist" />
+                                <h2 class="price itemcontainer">$ ${itemPrice}</h2>
+                                <input type="image" src="img/in-bag.svg" class="itemcontainer add-bag"/>
+                                <p class="reviews"> ${itemReviews} 🔥</p> 
+                              </div>`)
+          }
 
       //getting most properties into varibles for each object in dataArray
-      let itemType = info.type
-      let itemPrice = info.price
-      let itemColorPrimary = info.colorPrimary
-      let itemColorSecondary = info.colorSecondary
+      let itemType = product.type
+      let itemPrice = product.price
+      let itemColorPrimary = product.colorPrimary
+      let itemColorSecondary = product.colorSecondary
 
-      let itemId = info.id
-      let itemImgSrc = info.imgsrc
-      let itemTitle = info.title
-      let itemColorway = info.colorway
-      let itemReviews = info.reviews
-      let itemStock = info.stock
-
-
+      let itemId = product.id
+      let itemImgSrc = product.imgsrc
+      let itemTitle = product.title
+      let itemColorway = product.colorway
+      let itemReviews = product.reviews
+      let itemStock = product.stock
 
       //Shows all products by default. This changes once the user filters them.
       createCard ()
-
       
+      /*----------------------------------------------------- STOCK -----------------------------------------------------*/
+      // let bagButton = $(".add-bag"); 
+    
+
+        
+
+
+      //   for (let i = 0; i < bagButton.length; i++) {
+      //     $(bagButton[i]).on('click', checkStock());
+      //     function checkStock () {
+      //       if (product.stock >= 1) {
+      //         product.stock = product.stock-1;
+      //       }
+      //       else {
+      //         return $(`#${product.id}`).hide()
+      //       }
+      //       }
+      //   }
+      /*----------------------------------------------------------------------------------------------------------*/
+      
+      let dataArrayFilteredType = []
+      let dataArrayFilteredPrice = []
+      let dataArrayFiltered = []
       
       //Once the "APPLY FILTERS" button is clicked:
       $("#apply-filter").click(function (event) {
-
-        let max = 375
-
-        function updateTextInput(max) {
-        max = $('#textInput').value; 
-        $('#textInput').empty().append("$0 - $" + max)
-        }
-        
-        $("#range").change(function (e) {updateTextInput(this.value)})
-
-        let colorArray = []
-
-        event.preventDefault();
-        colorArray = $("input:checkbox:checked").map(function(){
-          return $(this).attr('name').toLowerCase();
-        }).get();
-
-
-        if (itemType != filteredType || itemPrice > max || !colorArray.includes(itemColorPrimary) || !colorArray.includes(itemColorSecondary)) {
-          $(`#${itemId}`).hide()
-        }
-
 
         // --------------------------------------------------------------------------------
         // --------------------------------------------------------------------------------
@@ -105,7 +106,8 @@ $.getJSON(JSONurl, function (response, status) {
         // if (itemType != filteredType) {
         //   $(`#${itemId}`).hide()
         // }
-
+        // -------------------- TYPE FILTER USING ARRAY.FILTER--------------------
+        dataArrayFilteredType = dataArray.filter((product)=> {return product.type == type})
         // -------------------- PRICE FILTER --------------------
         // function updateTextInput(max) {
         // $('#textInput').value=max; 
@@ -115,8 +117,13 @@ $.getJSON(JSONurl, function (response, status) {
         // }
         // }
         // $("#range").change(function (e) {updateTextInput(this.value)})
-
+        // -------------------- PRICE FILTER USING ARRAY.FILTER()--------------------
+        let max = $('#range').val();
+        console.log(max)
+        dataArrayFilteredPrice = dataArrayFilteredType.filter((product)=>{return product.price <= max});
         // -------------------- COLOR FILTER --------------------
+        // -------- falta tener en cuenta que algunos itemColorSecondary = null--------
+        // ------------------------------------------------------
         // let colorArray = []
 
         // event.preventDefault();
@@ -124,13 +131,33 @@ $.getJSON(JSONurl, function (response, status) {
         //   return $(this).attr('name').toLowerCase();
         // }).get();
 
-
         // if (!colorArray.includes(itemColorPrimary) || !colorArray.includes(itemColorSecondary)) {
         //     $(`#${itemId}`).hide()
         //   }
-      }
-    )}//cierra el for loop
-  }
+        // -------------------- COLOR FILTER USING ARRAY.FILTER()--------------------
+        let colorArray = []
+        colorArray = $("input:checkbox:checked").map(function(){
+          return $(this).attr('name').toLowerCase();
+        }).get();
+        dataArrayFiltered = dataArrayFilteredPrice.filter((product)=>{
+          return (colorArray.includes(product.colorPrimary)) || (colorArray.includes(product.colorSecondary)) });
+        console.log(dataArrayFiltered);
+
+      })            
+    }//cierra el for loop
+
+    //------------------------- STOCK (no funciona) ------------------------
+    $(".add-bag").click(function productStock(){
+      let id = $(".add-bag").parent('div').attr('id')
+      console.log(dataArray[id - 1].stock);
+      if (dataArray[id - 1].stock >= 1) {
+        dataArray[id - 1].stock = dataArray[id - 1].stock-1;
+              }
+      else {
+                return $(`#${id - 1}`).hide()
+              }})
+  
+  } 
 })
 
 
@@ -138,7 +165,6 @@ $.getJSON(JSONurl, function (response, status) {
 Executes the following once the DOM is loaded
 ----------------------------------------------------------------------------------------------------------*/
 $(document).ready(function(){
-
   let bagButton = $(".add-bag"); 
   /*----------------------------------------------------------------------------------------------------------
   UTILIZING A JQUERY SELECTOR, THIS LOOP ITERATES OVER ALL PRODUCTS ADD TO BAG BUTTONS
@@ -153,12 +179,16 @@ $(document).ready(function(){
   ---To improve: Check stock at the beginning of the loop with a conditional statement and update stock at the end.
     Tax and shipping prices are going to be displayed on checkout page, which I haven't started yet.
 
+    
 
   ----------------------------------------------------------------------------------------------------------*/
+
+    
   for (let i = 0; i < bagButton.length; i++) {
   
     $(bagButton[i]).on('click', addToBagEvent);
     function addToBagEvent (event) {
+      
       
       // if (checkStock()) {
 
@@ -252,6 +282,8 @@ $(document).ready(function(){
       );
 
       updateBag()
+      localStorage.setItem('total', JSON.stringify(bag))
+
 
         //add tax
     // }
@@ -310,7 +342,6 @@ function updateBag () {
           title: 'Your Wishlist',
           showLoaderOnConfirm: false,
           html: `<hr> <br> ${htmlWLAlert}`,
-
           width: 800,
           showCloseButton: true,
         })})
@@ -437,20 +468,12 @@ Functionalities:
   });
 
 
-
-
-
-
-
-
-  let userName = $("#message-name").value
-
   $("#send").click(function(){
+    let userName = $("input[name=username]").val()
     Swal.fire({
       title: 'Your message has been sent!',
       showLoaderOnConfirm: false,
-      html: `We will get back to you shortly, ${userNaem} 😉`,
-
+      html: `We will get back to you shortly, ${userName} 😉`,
       width: 800,
       showCloseButton: true,
     })})

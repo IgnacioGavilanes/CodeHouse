@@ -14,7 +14,7 @@
     <nav class="co-navbar">
         <ul> 
             <li class="logo menu">
-                <a href="">
+                <a href="http://localhost:8000">
                     <img src="img/logo.svg" alt="">
                 </a>
             </li>
@@ -35,7 +35,7 @@
                 <a href="#contact-form" class="menu-text">Contact</a>
             </li>
             <li class="navlinks menu">
-                <a href="index.html" class="menu-text">Home</a>
+                <a href="http://localhost:8000" class="menu-text">Home</a>
             </li>
         </ul>
     </nav>
@@ -57,20 +57,20 @@
         </div> 
 
         <div>
-            <form action="">
-                <label for="coupon">Do you have any coupons?</label>
-                <input type="text" name='coupon' id="coupon">
-                <button type="submit">Apply</button>
-            </form>
+            <!-- <form action=""> -->
+            <label for="coupon">Do you have any coupons?</label>
+            <input type="text" name='coupon' id="coupon">
+            <button type="submit" id='apply-coupon'>Apply</button>
+            <!-- </form> -->
             <div id="pretotal">
                 <div>
                     <h2>Shipping</h2>
-                    <h2>$PLACEHOLDER</h2>
+                    <h2 CLASS='shipping'>$PLACEHOLDER</h2>
                 </div> 
                 <hr>
                 <div>
                     <h2>Pre-total</h2>
-                    <h2 id="pre-total">$PLACEHOLDER</h2>
+                    <h2 id="pretotal-amount">$PLACEHOLDER</h2>
                 </div>
                 <hr>
             </div>
@@ -80,7 +80,7 @@
                 <h2>Personal Information</h2>
                 <form action="">
                     <label for="name">Name</label>
-                    <input type="text" name="name">
+                    <input type="text" name="name" required>
                     <label for="email">Email</label>
                     <input type="text" name="email">
                     <label for="phone">Phone</label>
@@ -104,17 +104,17 @@
         <div>
             <div>
                 <h2>Tax</h2>
-                <h2>$PLACEHOLDER</h2>
+                <h2 class='tax'>$PLACEHOLDER</h2>
             </div>
             <hr>
             <div>
                 <h2>Shipping</h2>
-                <h2>$PLACEHOLDER</h2>
+                <h2 class='shipping'></h2>
             </div>
             <hr>
             <div>
                 <h2>Total</h2>
-                <h2>$PLACEHOLDER</h2>
+                <h2 id='total'>$PLACEHOLDER</h2>
             </div>
             <hr>
             <button id='finalize' type="submit">Confirm Purchase</button>

@@ -131,13 +131,13 @@
         <hr  id='contact-separator'>
         <h1 id='contact-title'>Contact Us</h1>
         <form action="" id='contact-form'>
-            <label for="" id='message-name' class='cf-label'>Name</label><br>
-            <input type="text"> <br>
+            <label for="" class='cf-label'>Name</label><br>
+            <input type="text" id='message-name' name='username' required> <br>
             <label for="" class='cf-label'>Email</label><br>
-            <input type="email"> <br>
+            <input type="email" required> <br>
             <label for="" class='cf-label'>Message</label><br>
-            <textarea rows="4" cols="50"></textarea> <br>
-            <input type="button" value='Send Message' id='send'>
+            <textarea rows="4" cols="50" required></textarea> <br>
+            <input type="button" type='submit' value='Send Message' id='send'>
 
         </form>
     </main>

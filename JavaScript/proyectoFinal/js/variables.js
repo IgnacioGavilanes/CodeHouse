@@ -9,7 +9,7 @@ let quantity = 0;
 let preTaxTotal = 0;
 
 //Tax (21% of Price * Quantity). let total = bag * taxValue * quantity (if quantity != 0)
-const taxValue = 1.21;
+const taxValue = 0.21;
 
 //Total after tax
 let bag = 0;
@@ -23,12 +23,9 @@ const JSONurl = "./js/data.json"
 
 //jQuery selector for all the add to bag buttons on our products' cards
 
+let shipping = 20.00;
 
 //Product card
-
-
-
-
 
 
 
