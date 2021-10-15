@@ -9,7 +9,7 @@ let quantity = 0;
 let preTaxTotal = 0;
 
 //Tax (21% of Price * Quantity). let total = bag * taxValue * quantity (if quantity != 0)
-const taxValue = 0.21;
+const taxValue = 0.021;
 
 //Total after tax
 let bag = 0;

@@ -162,8 +162,6 @@ for (let i = 0; i <checkoutItems.length; i++) {
     `);
 }
 
-
-
 function generateId() {
     var orderId = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -171,7 +169,6 @@ function generateId() {
         orderId += possible.charAt(Math.floor(Math.random() * possible.length));
     return orderId;
   }
-
 
 $("#finalize").click(function(){
     localStorage.clear();
@@ -207,13 +204,11 @@ $('#apply-coupon').click( function () {
         $('#total').empty().append(`$${(taxValue * pretotaaal)+ pretotaaal + shipping}`)
         Swal.fire({
             title: 'Your coupon has been applied!',
-            color: 'white',
             toast:true,
             position: 'bottom-end',
             icon: 'success',
             showConfirmButton: false,
             timer: 2000,
-            allowOutsideClick: false,
             showLoaderOnConfirm: false,
           })
     }
@@ -234,3 +229,9 @@ $('#apply-coupon').click( function () {
 
 $('.tax').empty().append(`$${taxValue * pretotaaal}`)
 $('#total').empty().append(`$${(taxValue * pretotaaal)+ pretotaaal + shipping}`)
+
+$(".co-remove").click(function (){
+    console.log("removed...")
+    $(".co-remove").parent().hide();
+    $(".wl-item").hide()
+  })

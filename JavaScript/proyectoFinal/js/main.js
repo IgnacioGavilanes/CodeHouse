@@ -22,23 +22,6 @@ $.getJSON(JSONurl, function (response, status) {
       type = $('input[name=type]:checked', '#typeForm').val()
     });
 
-
-
-
-
-
-
-    
-    
-
-        // if (this[product.stock] >= 1) {
-        //   this[product.stock] = this[product.stock] -1;
-        //   console.log(this[product.stock])
-        //   return this[product.stock]}
-        // else {
-        //   return $(`#${product.id}`).hide()
-        // }})
-
     for (const product of dataArray){
       function createCard () {
         $(parentNode).append(`<div class="card" id=${itemId}>
@@ -70,10 +53,6 @@ $.getJSON(JSONurl, function (response, status) {
       
       /*----------------------------------------------------- STOCK -----------------------------------------------------*/
       // let bagButton = $(".add-bag"); 
-    
-
-        
-
 
       //   for (let i = 0; i < bagButton.length; i++) {
       //     $(bagButton[i]).on('click', checkStock());
@@ -88,62 +67,33 @@ $.getJSON(JSONurl, function (response, status) {
       //   }
       /*----------------------------------------------------------------------------------------------------------*/
       
-      let dataArrayFilteredType = []
-      let dataArrayFilteredPrice = []
+      
       let dataArrayFiltered = []
       
       //Once the "APPLY FILTERS" button is clicked:
       $("#apply-filter").click(function (event) {
 
-        // --------------------------------------------------------------------------------
-        // --------------------------------------------------------------------------------
-        // --------------------------------------------------------------------------------
+        //User-specified maximum price
+        let max = parseInt($('#range').val());
 
-        // ESTOS FILTROS ANDAN TODOS BIEN POR SEPARADO, ESTO ESTA COMENTADO PARA PODER
-        // UNIR TODOS ESTOS FILTROS DENTRO DE UN SOLO IF STATEMENT...
-
-        // -------------------- TYPE FILTER --------------------
-        // if (itemType != filteredType) {
-        //   $(`#${itemId}`).hide()
-        // }
-        // -------------------- TYPE FILTER USING ARRAY.FILTER--------------------
-        dataArrayFilteredType = dataArray.filter((product)=> {return product.type == type})
-        // -------------------- PRICE FILTER --------------------
-        // function updateTextInput(max) {
-        // $('#textInput').value=max; 
-        // $('#textInput').empty().append("$0 - $" + max)
-        // if (itemPrice > max) {
-        //   $(`#${itemId}`).hide()
-        // }
-        // }
-        // $("#range").change(function (e) {updateTextInput(this.value)})
-        // -------------------- PRICE FILTER USING ARRAY.FILTER()--------------------
-        let max = $('#range').val();
-        console.log(max)
-        dataArrayFilteredPrice = dataArrayFilteredType.filter((product)=>{return product.price <= max});
-        // -------------------- COLOR FILTER --------------------
-        // -------- falta tener en cuenta que algunos itemColorSecondary = null--------
-        // ------------------------------------------------------
-        // let colorArray = []
-
-        // event.preventDefault();
-        // colorArray = $("input:checkbox:checked").map(function(){
-        //   return $(this).attr('name').toLowerCase();
-        // }).get();
-
-        // if (!colorArray.includes(itemColorPrimary) || !colorArray.includes(itemColorSecondary)) {
-        //     $(`#${itemId}`).hide()
-        //   }
-        // -------------------- COLOR FILTER USING ARRAY.FILTER()--------------------
+        //Creates an array of colors selected by the user
         let colorArray = []
         colorArray = $("input:checkbox:checked").map(function(){
           return $(this).attr('name').toLowerCase();
         }).get();
-        dataArrayFiltered = dataArrayFilteredPrice.filter((product)=>{
-          return (colorArray.includes(product.colorPrimary)) || (colorArray.includes(product.colorSecondary)) });
-        console.log(dataArrayFiltered);
 
-      })            
+        dataArrayFiltered = dataArray.filter((product)=>{return (
+          (product.type === type || type == 'all') 
+          && 
+          (product.price <= max)
+          && 
+          (colorArray.includes(product.colorPrimary)) || (colorArray.includes(product.colorSecondary) || (colorArray.length == 0) || (colorArray.length == 12))
+          )
+        });
+        console.log(dataArrayFiltered)
+
+      })                
+
     }//cierra el for loop
 
     //------------------------- STOCK (no funciona) ------------------------
@@ -156,9 +106,14 @@ $.getJSON(JSONurl, function (response, status) {
       else {
                 return $(`#${id - 1}`).hide()
               }})
-  
   } 
 })
+
+///////////////////////////////NEED TO CREATE THE RESET FILTER BUTTON FUNCTIONALITY
+
+
+
+
 
 
 /*----------------------------------------------------------------------------------------------------------
@@ -226,12 +181,14 @@ $(document).ready(function(){
       let htmlBagAlert = ``;
       $.each(bagArray, function()
       {
-        htmlBagAlert += `<img class='bagalert-img' src="${this.itemImgSrc}">
-                        <h2>${this.itemName}</h2>
-                        <h4>${this.itemColorway}</h4>
-                        <h3>${this.itemPrice}</h3>
-                        <input class='remove' type="image" src="img/trash.svg"/>
-                        <br>` 
+        htmlBagAlert += `<div class='bag-item'>
+                          <img class='bagalert-img' src="${this.itemImgSrc}">
+                          <h2>${this.itemName}</h2>
+                          <h4>${this.itemColorway}</h4>
+                          <h3>${this.itemPrice}</h3>
+                          <input class='remove' type="image" src="img/trash.svg"/>
+                          <br>
+                        </div>` 
       });
       
       $("#bag").click(function(){
@@ -265,6 +222,7 @@ $(document).ready(function(){
         })
       },)
 
+      
       /*----------------------------------------------------------------------------------------------------------
       TOAST NOTIFICATION TO ALERT USER THAT AN ITEM HAS BEEN ADDED TO THE SHOPPING BAG
       Functionalities:
@@ -327,14 +285,15 @@ function updateBag () {
         let htmlWLAlert = ``;
         $.each(wlArray, function()
         {
-          htmlWLAlert += `<img class='bagalert-img' src="${this.wlItemImgSrc}">
-                          <h2>${this.wlItemName}</h2>
-                          <h4>${this.wlItemColorway}</h4>
-                          <h3>${this.wlItemPrice}</h3>
-                          <button type='submit'>Add To Bag</button>
-                          <input class='remove' type="image" src="img/trash.svg"/>
-
-                          <br>` 
+          htmlWLAlert += `</div class='wl-tiem'>
+                            <img class='bagalert-img' src="${this.wlItemImgSrc}">
+                            <h2>${this.wlItemName}</h2>
+                            <h4>${this.wlItemColorway}</h4>
+                            <h3>${this.wlItemPrice}</h3>
+                            <button type='submit'>Add To Bag</button>
+                            <input class='remove' type="image" src="img/trash.svg"/>
+                            <br>
+                          </div>` 
         });
 
         $("#wishlist").click(function(){
