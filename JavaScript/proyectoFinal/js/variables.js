@@ -14,18 +14,17 @@ const taxValue = 0.021;
 //Total after tax
 let bag = 0;
 
+//Array for products in bag
 let bagArray = [];
-// storeItems[itemId - 1].stock -= quantity;
+
 
 
 //URL to json file containing all products
 const JSONurl = "./js/data.json"
 
-//jQuery selector for all the add to bag buttons on our products' cards
-
+//Standard Shipping
 let shipping = 20.00;
 
-//Product card
 
 
 

@@ -6,7 +6,6 @@ it consumes variables.js, data.js and functions.js.
 /*----------------------------------------------------------------------------------------------------------
 Dynamic products' grid: Now utilizing AJAX & JQuery
 ----------------------------------------------------------------------------------------------------------*/
-let total = bag * taxValue * quantity
 
 let itemStock = ''
 
@@ -90,7 +89,6 @@ $.getJSON(JSONurl, function (response, status) {
           (colorArray.includes(product.colorPrimary)) || (colorArray.includes(product.colorSecondary) || (colorArray.length == 0) || (colorArray.length == 12))
           )
         });
-        console.log(dataArrayFiltered)
         $('#product-grid').empty()
         for (let filteredProduct of dataArrayFiltered) {
 
@@ -122,8 +120,8 @@ $.getJSON(JSONurl, function (response, status) {
                                       <input type="image" src="img/in-bag.svg" class="itemcontainer add-bag"/>
                                       <p class="reviews"> ${initial.reviews} 🔥</p> 
                                     </div>`)
-        
         }
+        
         
       })
 
@@ -131,19 +129,44 @@ $.getJSON(JSONurl, function (response, status) {
     }//cierra el for loop
 
     //------------------------- STOCK (no funciona) ------------------------
-    $(".add-bag").click(function productStock(){
-      let id = $(".add-bag").parent('div').attr('id')
-      console.log(dataArray[id - 1].stock);
-      if (dataArray[id - 1].stock >= 1) {
-        dataArray[id - 1].stock = dataArray[id - 1].stock-1;
-              }
-      else {
-                return $(`#${id - 1}`).hide()
-              }})
+    // $(".add-bag").click(function productStock(){
+    //   let id = $(".add-bag").parent('div').attr('id')
+      
+    //   console.log(this[id-1].stock);
+      // if (dataArray[id - 1].stock >= 1) {
+      //   dataArray[id - 1].stock = dataArray[id - 1].stock-1;
+      //         }
+      // else {
+      //           return $(`#${id - 1}`).hide()
+      //         }
+            // })
+
+      
+
+
+
   } 
 })
 
 
+
+// $(".reviews").click(function () {
+//   let reviewNum = parseInt(this.innerText);
+//   console.log(reviewNum)
+  
+//   if (this.style.color == "black") {
+//     this.style.color = orange;
+//     this.style.fontWeight = "bold";
+
+//     function addReview () {
+//       // console.log(reviewNum);
+//       let reviewId = $(this.attr('id'))
+//       console.log(reviewId)
+//       $(".reviews").html(reviewNum + 1);
+//     }
+
+//     addReview();
+//   }
 
 
 /*----------------------------------------------------------------------------------------------------------
@@ -242,10 +265,9 @@ $(document).ready(function(){
             //   num++
             //   localStorage.setItem(num, JSON.stringify({identificator}))
             //   }
-            for (let i = 0; i<= bagArray.length; i++) {
+            for (let i = 0; i <= bagArray.length; i++) {
               num++
               localStorage.setItem(num, JSON.stringify(bagArray[i]))
-              window.localStorage.removeItem(bagArray.length + 1);
               }
             window.location = "checkout.html"
           }
@@ -271,7 +293,6 @@ $(document).ready(function(){
 
       updateBag()
       localStorage.setItem('total', JSON.stringify(bag))
-
 
         //add tax
     // }
