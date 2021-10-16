@@ -75,11 +75,13 @@ NAVIGATION BAR
 #wishlist {
     width: 30px;
     height: 30px;
+    cursor: pointer;
 }
 
 #bag {
     width: 32px;
     height: 32px;
+    cursor: pointer;
 }
 
 /* mobile menu */
@@ -101,6 +103,7 @@ NAVIGATION BAR
     font-weight: bold;
     right: 2.7rem;
     top: 1.2rem;
+    cursor: pointer;
 }
 /*-----------------------------------------------------
 PROMO CODE SCROLLING BANNER
@@ -675,4 +678,8 @@ MEDIA QUERIES
     width: 100vw;
     margin-bottom: 5rem;
     margin-top: 3rem;
+}
+
+#finalize {
+    margin-bottom: 8rem;
 }

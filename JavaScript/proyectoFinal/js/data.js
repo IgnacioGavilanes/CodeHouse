@@ -109,7 +109,7 @@ for (let i = 0; i < localStorage.length; i++) {
     let num = localStorage.key(i); 
     //Now we get the entire object from localStorage but it is still in JSON format
     let retrievedObject = localStorage.getItem(num);
-    // window.localStorage.removeItem("undefined");
+    localStorage.removeItem("undefined");
 
     //We parse it in order to get a JS object
     let retrievedObjectParsed = JSON.parse(retrievedObject)
@@ -120,17 +120,17 @@ for (let i = 0; i < localStorage.length; i++) {
 }console.log(checkoutItems)
 
 //DON'T THINK I NEED THIS. WHEN I USE THIS I GET AN EXTRA UNDEFINED ELEMENT THAT
-//SHOWS UP AS AN ERROR ON CONSOLE
-let checkoutItemsInfo = []
-for (let iterator = 0; iterator <= checkoutItems.length; iterator++) {
-    // console.log(checkoutItems[iterator].identificator)
-    // console.log(Object.values(checkoutItems[iterator]))
-    // console.log(checkoutItems[iterator])
-    checkoutItemsInfo.push(checkoutItems[iterator])
-    // let result = objArray.map(a => a.foo);
-    // checkoutItemsInfo.push(someArray)
-    // console.log(checkoutItemsInfo)
-}
+// //SHOWS UP AS AN ERROR ON CONSOLE
+// let checkoutItemsInfo = []
+// for (let iterator = 0; iterator <= checkoutItems.length; iterator++) {
+//     // console.log(checkoutItems[iterator].identificator)
+//     // console.log(Object.values(checkoutItems[iterator]))
+//     // console.log(checkoutItems[iterator])
+//     checkoutItemsInfo.push(checkoutItems[iterator])
+//     // let result = objArray.map(a => a.foo);
+//     // checkoutItemsInfo.push(someArray)
+//     // console.log(checkoutItemsInfo)
+// }
 // console.log(checkoutItemsInfo[0].itemName)
 
 // let iterator
@@ -142,10 +142,11 @@ for (let iterator = 0; iterator <= checkoutItems.length; iterator++) {
 //IF I DECIDE TO ERASE THE LAST LOOP THAT POPULATES CHECKOUTITEMSINFO 
 //I NEED TO CHANGE CHECKOUTINTEMSINFO HERE TO CHECKOUTINTEMS
 let itemQtty = 1
-for (let i = 0; i <checkoutItems.length; i++) {
+for (let i = 0; i <= checkoutItems.length; i++) {
     let parentNode = $("#checkout-grid");
 
     //ACA TENGO QUE AGREGAR QTTY Y .HIDE SI EL ELEMENTO YA EXISTE
+
 
     $(parentNode).append(`
         <div class="checkout-item">
@@ -189,10 +190,10 @@ $("#finalize").click(function(){
         window.location = "http://localhost:8000"}})})
 
 
-let pretotaaal = localStorage.getItem('total');
-pretotaaal = JSON.parse(pretotaaal)
+let pretotalAmt = localStorage.getItem('total');
+pretotalAmt = JSON.parse(pretotalAmt)
 
-$('#pretotal-amount').empty().append(`$${pretotaaal}`)
+$('#pretotal-amount').empty().append(`$${pretotalAmt}`)
 $('.shipping').empty().append(`$${shipping}`)
 
 
@@ -201,7 +202,7 @@ $('#apply-coupon').click( function () {
     if (coupon.toLowerCase() === 'coderhouse') {
         shipping = 0
         $('.shipping').empty().append(`$${shipping}`)
-        $('#total').empty().append(`$${(taxValue * pretotaaal)+ pretotaaal + shipping}`)
+        $('#total').empty().append(`$${(taxValue * pretotalAmt)+ pretotalAmt + shipping}`)
         Swal.fire({
             title: 'Your coupon has been applied!',
             toast:true,
@@ -215,7 +216,7 @@ $('#apply-coupon').click( function () {
     else {
         shipping = 20;
         $('.shipping').empty().append(`$${shipping}`);
-        $('#total').empty().append(`$${(taxValue * pretotaaal)+ pretotaaal + shipping}`);
+        $('#total').empty().append(`$${(taxValue * pretotalAmt)+ pretotalAmt + shipping}`);
         Swal.fire({
         title: 'Invalid coupon...',
         toast:true,
@@ -227,8 +228,8 @@ $('#apply-coupon').click( function () {
         showLoaderOnConfirm: false,})}
 })
 
-$('.tax').empty().append(`$${taxValue * pretotaaal}`)
-$('#total').empty().append(`$${(taxValue * pretotaaal)+ pretotaaal + shipping}`)
+$('.tax').empty().append(`$${taxValue * pretotalAmt}`)
+$('#total').empty().append(`$${(taxValue * pretotalAmt)+ pretotalAmt + shipping}`)
 
 $(".co-remove").click(function (){
     console.log("removed...")

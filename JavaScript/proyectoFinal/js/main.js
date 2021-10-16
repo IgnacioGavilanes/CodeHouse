@@ -83,7 +83,7 @@ $.getJSON(JSONurl, function (response, status) {
         }).get();
 
         dataArrayFiltered = dataArray.filter((product)=>{return (
-          (product.type === type || type == 'all') 
+          (product.type == type || type == 'all') 
           && 
           (product.price <= max)
           && 
@@ -91,8 +91,42 @@ $.getJSON(JSONurl, function (response, status) {
           )
         });
         console.log(dataArrayFiltered)
+        $('#product-grid').empty()
+        for (let filteredProduct of dataArrayFiltered) {
+
+          $('#product-grid').append(`<div class="card" id=${filteredProduct.id}>
+                                      <img src="${filteredProduct.imgsrc}" class="item-img" alt="">
+                                      <h1 class="name">${filteredProduct.title}</h1>
+                                      <h3 class="colorway">${filteredProduct.colorway}</h3>
+                                      <input type="image" src="img/in-wishlist.svg" class="itemcontainer add-wishlist" />
+                                      <h2 class="price itemcontainer">$ ${filteredProduct.price}</h2>
+                                      <input type="image" src="img/in-bag.svg" class="itemcontainer add-bag"/>
+                                      <p class="reviews"> ${filteredProduct.reviews} 🔥</p> 
+                                    </div>`)
+        }
+
+
+
 
       })                
+
+      $("#reset-filter").click(function (event) { 
+        $('#product-grid').empty()
+        for (const initial of dataArray){
+          $('#product-grid').append(`<div class="card" id=${initial.id}>
+                                      <img src="${initial.imgsrc}" class="item-img" alt="">
+                                      <h1 class="name">${initial.title}</h1>
+                                      <h3 class="colorway">${initial.colorway}</h3>
+                                      <input type="image" src="img/in-wishlist.svg" class="itemcontainer add-wishlist" />
+                                      <h2 class="price itemcontainer">$ ${initial.price}</h2>
+                                      <input type="image" src="img/in-bag.svg" class="itemcontainer add-bag"/>
+                                      <p class="reviews"> ${initial.reviews} 🔥</p> 
+                                    </div>`)
+        
+        }
+        
+      })
+
 
     }//cierra el for loop
 
@@ -108,10 +142,6 @@ $.getJSON(JSONurl, function (response, status) {
               }})
   } 
 })
-
-///////////////////////////////NEED TO CREATE THE RESET FILTER BUTTON FUNCTIONALITY
-
-
 
 
 
@@ -191,7 +221,7 @@ $(document).ready(function(){
                         </div>` 
       });
       
-      $("#bag").click(function(){
+      $("#bag, #counter").click(function(){
         Swal.fire({
           title: 'Your Bag',
           width: 800,
@@ -290,11 +320,21 @@ function updateBag () {
                             <h2>${this.wlItemName}</h2>
                             <h4>${this.wlItemColorway}</h4>
                             <h3>${this.wlItemPrice}</h3>
-                            <button type='submit'>Add To Bag</button>
+                            <button type='submit' class='fromwl-tobag' >Add To Bag</button>
                             <input class='remove' type="image" src="img/trash.svg"/>
                             <br>
-                          </div>` 
+                          </div>`
+          $(".fromwl-tobag").click( () => {
+            bagArray.push(this)
+            wlArray.remove(this)
+
+          })
         });
+
+
+        
+
+
 
         $("#wishlist").click(function(){
         Swal.fire({
@@ -466,66 +506,7 @@ Functionalities:
   // $('.sidebar').scrollTo(2300);
 
 
-
-
-
-
-
-
-
-
-
-
 });//$(document).ready CLOSING TAG
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 function newProduct(id, title, colorway, brand, collab, type, reviews, colorPrimary, colorSecondary, stock, price, imgsrc){
   this.id = id;
@@ -579,7 +560,6 @@ function newProduct(id, title, colorway, brand, collab, type, reviews, colorPrim
   }
 }
 
-
 //FUNCIONA
 // $(".arrow-left").click(function(){
 //   $(".sidebar").fadeOut(100, function(){
@@ -600,8 +580,6 @@ function newProduct(id, title, colorway, brand, collab, type, reviews, colorPrim
 //     "height":"auto",
 //   })
 // })})
-
-
 
 //function checkStock () {
 
@@ -625,17 +603,6 @@ function newProduct(id, title, colorway, brand, collab, type, reviews, colorPrim
   //     return true
   // }
 //}
-
-
-
-
-
-
-
-
-
-
-
 
 /// Filters ANDAN TODOS!!!
 
